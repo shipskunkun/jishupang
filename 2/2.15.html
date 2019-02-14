@@ -1,0 +1,32 @@
+<!--
+	component使用复习
+		局部注册
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+        	<bus></bus>
+        </div>
+        <script type="text/javascript">
+        	//局部注册
+        	var bus = {
+                template: `<div> 这是局部组件测试</div>`
+            }
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    cents: 20000
+                },
+                components: {
+                    bus: bus
+                }
+            })
+        </script>
+    </body>
+</html>

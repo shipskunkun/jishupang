@@ -1,0 +1,34 @@
+<!--
+	component使用复习
+	注册，全局注册、局部注册
+		注意：
+		全局注册，不需要在 vue 实例中components 中声明
+		局部注册需要
+	如何向组件传值
+	父子组件
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+        	<bus></bus>
+        </div>
+        <script type="text/javascript">
+        	//全局注册
+        	Vue.component('bus', {
+        		template: `<div>这是汽车组件</div>`
+        	})
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    cents: 20000
+                }
+            })
+        </script>
+    </body>
+</html>

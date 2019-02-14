@@ -1,0 +1,36 @@
+<!--
+	component向组件传值
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+        	<bus :objp="obj"></bus>
+        </div>
+        <script type="text/javascript">
+        	//局部注册
+        	var bus = {
+                template: `<div> 这是组件传值测试 {{ objp.name }} 今年 {{ objp.age }}</div>
+                `,
+                props: ['objp']
+            }
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    obj: {
+                        name: '迟不子',
+                        age: 18
+                    }
+                },
+                components: {
+                    bus: bus
+                }
+            })
+        </script>
+    </body>
+</html>

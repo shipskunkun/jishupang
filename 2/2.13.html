@@ -1,0 +1,54 @@
+<!--
+ template 使用
+    三种写法
+    哪三种写法？
+    直接在实例里面写的
+    使用id绑定template 完了在data中定义的，最常用
+        注意，如果有template，只渲染template里面的东西
+        template里面必须要有 div p 这些html外层标签，光秃秃的不渲染
+        template 使用注意点：
+
+    在script中写的，
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <!--最常用的写法
+        <div id="app">
+            <template id="test">
+                <div>
+                    {{ cents }}
+                </div>
+            </template>
+		</div>
+
+        <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+            	cents: 20000
+            },
+            template: '#test'
+		})
+        </script>
+        -->
+
+        <div id="app">
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    cents: 20000
+                },
+                template: '<div>{{ cents }}</div>'
+            })
+        </script>
+    </body>
+</html>
