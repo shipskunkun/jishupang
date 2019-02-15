@@ -15,8 +15,8 @@
         	<parent :objp="obj"></parent>
         </div>
         <script type="text/javascript">
-            //全局注册孩子组件
-            //或者使用变量定义， 用 component 引入
+            // 全局注册孩子组件
+            // 或者使用变量定义， 用 component 引入
             Vue.component('child',{
                 template:`<div> 我还是个宝宝</div>`
             })
@@ -30,7 +30,12 @@
                     <child></child>
                 </div>
                 `,
-                props: ['objp']
+                props: ['objp'],
+                components: {
+                    child: {
+                        template: `<div> 我还是个宝宝</div>`
+                    }
+                }
             }
             var app = new Vue({
                 el: '#app',
