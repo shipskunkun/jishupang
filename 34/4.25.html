@@ -1,0 +1,41 @@
+<!--
+	nextTick 和 created mounted updated 顺序？
+
+    在执行， vm.person = "lisi" 后
+    只执行了 updated
+    没有执行 nextTick？
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{  person }}
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    person: 'zhangsan'
+                },
+                created: function(){
+                    console.log("created", this.person);
+                },
+                mounted: function(){
+                    console.log("mounted", this.person);
+                },
+                updated: function(){
+                    console.log("updated", this.person);
+                }
+            })
+            // vm.age = "29";
+            vm.$nextTick(function(){
+                console.log('执行nextTick', this.person);
+            })
+        </script>
+    </body>
+</html>

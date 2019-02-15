@@ -6,6 +6,9 @@
 		局部注册需要
 	如何向组件传值
 	父子组件
+
+    template: '#id'
+    意思，模板是找 id的template
  -->
  <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +20,27 @@
     <body>
         <div id="app">
         	<bus></bus>
+            <bus2></bus2>
         </div>
+
+        <template id = "test">
+            <div>
+                <p>template: '#id'</p>
+                <p>意思，模板是找 id的template</p>
+            </div>
+        </template>
         <script type="text/javascript">
         	//全局注册
         	Vue.component('bus', {
         		template: `<div>这是汽车组件</div>`
         	})
+
+            //全局注册2
+            Vue.component('bus2', {
+                template: '#test'
+            })
+
+
             var app = new Vue({
                 el: '#app',
                 data: {

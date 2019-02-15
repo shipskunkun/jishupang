@@ -5,7 +5,7 @@
     直接在实例里面写的
     使用id绑定template 完了在data中定义的，最常用
         注意，如果有template，只渲染template里面的东西
-        template里面必须要有 div p 这些html外层标签，光秃秃的不渲染
+        template里面必须要有 div p 这些html外层标签，渲染的时候，会去掉 template, 如果 <template> 直接是文字不行，要是html代码段
         template 使用注意点：
 
     在script中写的，

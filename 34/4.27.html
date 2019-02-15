@@ -1,0 +1,79 @@
+<!--
+	slot的使用
+    参考博客：https://www.w3cplus.com/vue/vue-slot.html
+    几种情况：
+    1，如果父组件未向模板中分发内容（插入内容），则显示插槽中默认内容（前提是slot中设置了默认内容）
+
+    意思是组件里为空， 比如 <alert></alert>
+    template 渲染成 html = 组件渲染成html， 是渲染template 默认内容
+
+
+    2,父组件给模板分发了内容，则分发的内容会替换slot标签
+
+    意思是, 组件里面中有东西, 会替换 slot 标签中的内容，而模板中，不是slot的部分，不会被替换，还在
+    <alert>
+        <div>组件插入内容</div>
+    </alert>
+
+
+    3, 除此之外，假设模板中未设置插槽，父组件依旧向其分发了内容，但最终任何分发的内容都不会显示。
+
+    意思是，模板中没插槽，template 没slot, 父组件中仍然有 东西
+    组件向模板发的东西不会显示
+
+
+    按照插的不同有几种
+    1, slot 只有一处，只能往这一处插，不能往别地方插，不用名字
+    2, 命名插槽，slot 有多处，我们通过slot的名字来区分不同的 插槽内容，然后往里面插东西
+    3, 作用域插槽
+
+
+    这篇文章主要学习和了解了Vue中的插槽<slot>。
+    是一个空壳子，它显示与否以及怎么显示完全是由父组件来控制。不过，插槽显示的位置由子组件自身决定，slot写在组件template的哪块，父组件传过来的模板将来就显示在哪块。
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <alert>
+                <div slot="header">自定义头部内容</div>
+                <div slot="middle">自定义中部内容</div>
+            </alert>
+        </div>
+
+        <template id="alert">
+            <div>
+                <p>我是测试用的alert模板内容</p>
+                 <slot name="header">模板头部内容</slot>
+                 <slot name="middle">模板中部内容</slot>
+            </div>
+        </template>
+
+        <script type="text/javascript">
+            Vue.component('alert', {
+                template: '#alert',
+            })
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+                methods: {
+                    handle: function(num, e) {
+                        console.log(num, e);
+                        console.log(e.target);
+                        console.log(e.currentTarget);
+                    },
+                    handle2: function(e, num) {
+                        console.log(e, num);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

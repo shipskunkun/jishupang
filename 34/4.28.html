@@ -1,0 +1,47 @@
+<!--
+	单个插槽
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <alert>
+                <div>自定内容</div>
+            </alert>
+        </div>
+
+        <template id="alert">
+            <div>
+                <p>我是测试用的alert模板内容</p>
+                 <slot>模板头部内容</slot>
+            </div>
+        </template>
+
+        <script type="text/javascript">
+            Vue.component('alert', {
+                template: '#alert',
+            })
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+                methods: {
+                    handle: function(num, e) {
+                        console.log(num, e);
+                        console.log(e.target);
+                        console.log(e.currentTarget);
+                    },
+                    handle2: function(e, num) {
+                        console.log(e, num);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

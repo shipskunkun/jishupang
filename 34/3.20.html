@@ -1,0 +1,40 @@
+<!--
+	$event 和调用顺序有关系吗？
+        没有
+        是鼠标事件属性
+        target 是实际点击元素
+        currentTarget 是绑定click 事件的元素
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div @click="handle(33, $event)">
+                <span>点击一</span>
+             </div>
+        	<div @click="handle2( $event, 44)">点击二</div>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el: '#app',
+                data: {
+                },
+                methods: {
+                    handle: function(num, e) {
+                        console.log(num, e);
+                        console.log(e.target);
+                        console.log(e.currentTarget);
+                    },
+                    handle2: function(e, num) {
+                        console.log(e, num);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
