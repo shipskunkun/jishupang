@@ -1,6 +1,8 @@
 # jishupang
 
-技术胖系列视频练习
+Vue全家桶部分
+https://jspang.com/archives/
+
 
 主要包括这么几节内容：
 技术胖的Vue-cli 视频教程  2017-04-10
@@ -25,6 +27,29 @@ store.commit('add')
 在页面引入的时候， import store from
 $store.state.count
 $store.commit('add')
+
+3， 如何简化state的获取和修改、简化 $store.commit( )
+{{ $store.state.count }}  =>  {{ count }}
+使用computed 属性
+mapState, 这是一个函数, 传入值后回有变化
+最常用的，数组的方式
+
+
+mutations 修改状态的时候，传递参数
+mapMutations 难道methods 中不能写别的方法了吗
+
+4，为什么要用getters 对state进行过滤
+...mapState(['count'])
+返回的到底是啥？
+
+
+
+5，如何异步修改state
+actions是异步的改变state状态
+mutations是同步改变状态。
+
+
+6， mutations 修改状态的时候，传递参数
 
 
 
