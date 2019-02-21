@@ -4,7 +4,10 @@
     <br>
     <button @click="goto()">点击跳转到B页面</button>
     <br>
-    <router-link to="/state1">我是A页面，我要跳到state页面</router-link>
+    <router-link to="/state1">我是A页面，我要跳到state1页面</router-link>
+    <br>
+    <router-link to="/state2">我是A页面，我要跳到state2页面</router-link>
+    <br>
 	<router-view></router-view>
   </div>
 </template>

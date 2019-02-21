@@ -4,6 +4,7 @@ import pageA from '@/components/pageA'
 import pageB from '@/components/pageB'
 import pageC from '@/components/pageC'
 import state1 from '@/components/state1'
+import state2 from '@/components/state2'
 
 
 Vue.use(Router)
@@ -31,6 +32,11 @@ export default  new Router({
       path: '/state1',
       name: 'state1',
       component: state1
+    },
+    {
+      path: '/state2',
+      name: 'state2',
+      component: state2
     }
   ]
 })
