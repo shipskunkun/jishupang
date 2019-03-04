@@ -28,7 +28,6 @@ export default new Vuex.Store({
 			context.commit('add', 10);
 			setTimeout(()=>{context.commit('reduce')}, 2000);
 			console.log('执行addActions');
-
 		},
 		reduceAction({commit}){
 			commit('reduce')

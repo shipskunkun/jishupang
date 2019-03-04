@@ -22,34 +22,58 @@ vuex掌握哪些知识：
       }
     })
 
-store.commit('add')
 
 在页面引入的时候， import store from
-$store.state.count
-$store.commit('add')
+<p>{{ $store.state.count }}</p>
+<button @click="$store.commit('add', 10)">+10</button>
 
 3， 如何简化state的获取和修改、简化 $store.commit( )
 {{ $store.state.count }}  =>  {{ count }}
 使用computed 属性
 mapState, 这是一个函数, 传入值后回有变化
-最常用的，数组的方式
+最常用的，mapState里面数组的方式
 
+https://blog.csdn.net/weixin_42143687/article/details/83036270
 
 mutations 修改状态的时候，传递参数
-mapMutations 难道methods 中不能写别的方法了吗
+
+问题：
+使用 mapState 和 mapMutations  难道methods 中不能写别的方法了吗
+mapState不能写的变量了吗
+computed: mapState(['count'])
+methos: mapMutations(['add', 'reduce'])
+
+使用 ...mapState(['count'])
+...mapMutation['count']
 
 4，为什么要用getters 对state进行过滤
+作用其实相当于过滤器！
+
+每次获取的时候都调用getters
+
 ...mapState(['count'])
 返回的到底是啥？
 
+使用es6的语法
+..mapGetters(["count"])
+
+
+如何放到服务器上？
+首先到 config 上的 index.js 文件
+assetsPublicPath: './' 改成相对路径
+npm run build 项目打包到 dist 目录
+把打包生成的文件，index.html 和 static 文件夹放到服务器上
 
 
 5，如何异步修改state
 actions是异步的改变state状态
 mutations是同步改变状态。
 
+同步和异步的区别？
 
-6， mutations 修改状态的时候，传递参数
+
+
+6， module 模块组，项目不大的时候不需要用
 
 
 
@@ -91,9 +115,6 @@ Vue-router需要掌握的知识：
     query、params
     $route.params.id
     $route.query.id
-
-
-
 
 Vue-cli 怎么开始？
     npm install -global vue-cli // 全局安装脚手架, 已经安装后的不用再安装

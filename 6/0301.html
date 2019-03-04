@@ -1,0 +1,45 @@
+<!--https://juejin.im/post/5b067e66f265da0de45237cd-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            <ul class="list">
+                <li class="item" v-for="item in list">{{ item }}</li>
+            </ul>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#main',
+                data: {
+                    list: [
+                        'AAAAAAAAAA',
+                        'BBBBBBBBBB',
+                        'CCCCCCCCCC'
+                    ]
+                },
+                mounted: function () {
+                    console.log('before push mounted', this.$data.list.length,this.$el.querySelectorAll('.item').length);
+                    this.list.push('DDDDD');
+                    console.log('mounted', this.$data.list.length,this.$el.querySelectorAll('.item').length);
+                },
+                beforeUpdate:function () {
+                    console.log('beforeUpdate', this.$data.list.length, this.$el.querySelectorAll('.item').length);
+                },
+                updated:function () {
+                    console.log('Updated', this.$data.list.length, this.$el.querySelectorAll('.item').length);
+                }
+            })
+
+            Vue.nextTick(function() {
+                console.log('nextTick', vm.$data.list.length, vm.$el.querySelectorAll('.item').length);
+            })
+
+      </script>
+    </body>
+</html>
