@@ -1,0 +1,28 @@
+<!--
+call、apply
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+		<div id='con'>this is con</div>
+		<script>
+            var target = {};
+			var handler = {};
+			var proxy = new Proxy(target, handler);
+			proxy.a = 'b';
+			console.log(target);
+			console.log(target.a);
+			// target.a // "b"
+
+
+		</script>
+    </body>
+</html>

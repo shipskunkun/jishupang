@@ -1,0 +1,28 @@
+<!--
+reduce
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+		<div id='con'>this is con</div>
+		<script>
+            var arr = [1, 2, 3, 4, 5];
+            var sum = arr.reduce(function (pre, cur, index, arr) {
+                console.log('pre', pre);
+                console.log('cur', cur);
+                console.log('index', index);
+                console.log('arr', arr);
+                return pre + cur;
+            })
+
+
+		</script>
+    </body>
+</html>

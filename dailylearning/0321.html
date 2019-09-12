@@ -1,0 +1,215 @@
+<!--
+几种继承方式
+1. 原型链继承
+2. 构造
+3. 组合（1+2
+4. 原型式继承
+5. 寄生式
+6. 寄生组合事继承（ 4+5
+
+参考文章：
+https://juejin.im/post/5b4d9ed0e51d45198c018c87
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <script src="../vue/vue.js"></script>
+    </head>
+    <body>
+		<div id='con'>this is con</div>
+		<script>
+        
+		//原型式
+        //优点：可以继承所有的属性和方法
+        //缺点：如果父类的某个属性是基本类型，子类无法修改原型中的属性，只会添加一个新属性，如果是引用类型，会影响所有的子类实例
+		function Person() {
+            this.name = 'zhangsan';
+            this.age = 15;
+            this.visited = ['beijing', 'shanghai', 'hangzhou'];
+        }
+        Person.prototype.say = function() {
+            console.log(this.name);
+        }
+        function Child() {
+        }
+
+        Child.prototype = new Person();
+        Child.prototype.constructor = Child;
+
+        var c1 = new Child();
+        
+
+        c1.visited.push('wuhan');
+        c1.age = 21;
+
+        var c2 = new Child();
+
+        console.log('c1', c1);
+        console.log('c2', c2);
+
+        
+
+        /*
+        //构造函数
+        //优点：不同实例间互不干扰，可以利用 call 向父类传参
+        //缺点：不能共享父类的属性和方法
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.visited = ['beijing', 'shanghai', 'hangzhou'];
+        }
+        Person.prototype.say = function() {
+            console.log(this.name);
+        }
+        function Child(name, age) {
+            Person.call(this, name, age);
+        }
+
+        var c1 = new Child('lisi', 23);
+        var c2 = new Child('wangwu', 34);
+        c1.visited.push('riben');
+
+        console.log(c1);
+        console.log(c2);
+        
+
+       //组合继承
+       //优点：可以继承父类的方法、每个实例独立拥有一份从父类那里继承来的属性
+       //缺点：
+       function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.visited = ['beijing', 'shanghai', 'hangzhou'];
+        }
+        Person.prototype.say = function() {
+            console.log(this.name);
+        }
+        function Child(name, age) {
+            Person.call(this, name, age);
+        }
+
+        Child.prototype = new Person();
+        Child.prototype.constructor = Child;
+
+        var c1 = new Child('lisi', 23);
+        var c2 = new Child('wangwu', 34);
+        c1.visited.push('riben');
+
+        console.log(c1);
+        console.log(c2);
+
+        
+
+       //原型式继承
+       //优点：利用Object.create的方法，传给你一个父类对象，生成子类对象
+       //这里注意了！！！是传入对象，不是 function了
+       //缺点：还是有原型链同样的问题
+
+       var person = {
+            'name': 'zhangsan',
+            'age': 15,
+            'visited': ['beijing', 'shanghai', 'hangzhou'],
+            say: function() {
+                console.log(this.name);
+            }
+        }
+
+       function createChild(o) {
+            function F() {}
+            F.prototype = o;
+            return new F()
+        }
+
+        var c1 = createChild(person);
+        var c2 = createChild(person);
+
+        console.log(c1);
+        console.log(c1.__proto__  == person); //true
+        console.log(c1.__proto__.constructor);
+        console.log(c2);
+
+        c1.visited.push('riben');
+        console.log(c1);
+        console.log(c2);
+        
+
+       
+
+
+       //寄生继承
+       //优点：
+       //缺点：有原型链继承的缺点，而且每次创建实例的时候，那些公共的属性和方法都会被创建一次。
+       function createChild(o) {
+            var obj = {};
+            obj = Object.create(o);
+            obj.say = function() {
+                console.log(this.name)
+            }
+            return obj;
+        }
+        var person = {
+            'name': 'zhangsan',
+            'age': 15,
+            'visited': ['beijing', 'shanghai', 'hangzhou'],
+            say: function() {
+                console.log(this.name);
+            }
+        }
+
+        var c1 = createChild(person);
+        var c2 = createChild(person);
+
+        console.log(c1.name);
+        console.log(c1);
+        console.log(c1.visited);
+
+        */
+
+       //组合寄生式
+       //优点: 组合继承会两次 new 父类
+       //思路：子类的prototype不需要指向 父类的实例，直接指向 new Object(父类的原型)， 然后再用组合式继承
+       //创建的是 子类和 父类原型之间的关系，不是创建一个新子类对象
+
+       function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.visited = ['beijing', 'shanghai', 'hangzhou'];
+        }
+        Person.prototype.say = function() {
+            console.log(this.name);
+        }
+
+       function createChild(Child, Person) {
+            var proto = Object.create(Person.prototype);
+            proto.constructor = Child;
+            Child.prototype = proto;
+        }
+        function Child(name, age) {
+            Person.call(this, name, age);
+        }
+
+        createChild(Child, Person);
+
+
+        var c1 = new Child('zhangsan', 12);
+        var c2 = new Child('lisi', 22);
+
+        console.log(c1);
+        // console.log(Child.prototype.__proto__  == Person.prototype ); //true
+        console.log(c1.__proto__.__proto__ == Person.prototype);
+        // console.log(c1.__proto__ == Person.prototype);
+        // console.log(c1.__proto__.__proto__);
+        // c1.visited.push('wuhan');
+        // console.log(c1 instanceof Person);
+        // console.log(c2);
+       
+
+
+
+		</script>
+    </body>
+</html>
